@@ -1,0 +1,30 @@
+﻿<Window x:Class="Microsoft.Samples.Kinect.DiscreteGestureBasics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Microsoft.Samples.Kinect.DiscreteGestureBasics"
+        Title="Fitness Fatality"
+        Height="650" Width="750"
+        Closing="MainWindow_Closing">
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ffffffff" />
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ffffffff" />
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ffffffff" />
+        
+        <DataTemplate DataType="{x:Type local:GestureResultView}">
+            <Grid Width="Auto" Margin="5" Background="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+            </Grid>
+        </DataTemplate>
+        
+    </Window.Resources>
+
+    <Viewbox x:Name="kinectBodyViewbox">
+        <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+    </Viewbox>
+</Window>
