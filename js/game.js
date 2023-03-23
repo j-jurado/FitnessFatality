@@ -1,5 +1,5 @@
 ﻿
-var div1, div2, div3, loading, mode = 1, ready = false;
+var div1, div2, div3, loading, mode = 2, ready = false;
 
 var Game = function(){
 
@@ -12,8 +12,6 @@ var Game = function(){
 		loading = document.createElement( 'img' );
 		
 		loading.src = 'images/g/loading.jpg';
-
-
 
 		var wrap = document.body.appendChild( document.createElement( "div" ) )
 
@@ -141,6 +139,15 @@ var gameStart = function(){
 		})
 
 		var pause = false, lock = false;
+
+		if(mode == 2) {
+			lock = true;
+			player2.ai.stop();
+			Game.reload();
+			setTimeout( function(){
+				lock = false;
+			}, 1000 )
+		}
 	
 		document.onkeydown = function( ev ){
 			var ev = ev || window.event;
