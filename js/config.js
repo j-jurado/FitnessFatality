@@ -22,7 +22,7 @@ var Config = {
 			name: 'RYU1',
 			states: {
 				default: 'wait',
-				/******************** ÒÆ¶¯ *********************/
+				/******************** ï¿½Æ¶ï¿½ *********************/
 				wait: {
 					bg: 'RYU1_wait',
 					framesNum: 6,
@@ -100,7 +100,7 @@ var Config = {
 					easing: [ 0, 0, 5, 'easeIn' ],
 					attack_type: 1
 				},
-				/******************** ÌøÔ¾ *********************/
+				/******************** ï¿½ï¿½Ô¾ *********************/
 				jumpUp: {
 					bg: 'RYU1_jumpUp',
 					framesNum: 8,
@@ -148,10 +148,10 @@ var Config = {
 				light_boxing: {
 					bg: 'RYU1_light_boxing',
 					framesNum: 3,
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: 7,
 					attack_type: 2,
-					attack_config: [ 10, 60, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 20 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 20 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 20 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -162,7 +162,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'linear' ],
 					near: 130,
 					attack_type: 2,
-					attack_config: [ 10, 45, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 25 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 45, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 25 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 10 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -170,10 +170,10 @@ var Config = {
 				heavy_boxing: {
 					bg: 'RYU1_middle_boxing',
 					framesNum: 5,
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: 7,
 					attack_type: 2,
-					attack_config: [ 10, 60, 120, 0, 150, 'linear', 'heavy', 'attacked_heavy', 120 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 120, 0, 150, 'linear', 'heavy', 'attacked_heavy', 120 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, 25 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_boxing.mp3' ]
@@ -195,7 +195,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 6, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'light', 'attacked_light_bottom', 30 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'light', 'attacked_light_bottom', 30 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 3, false ],
 					effect_position: [ 0, 80 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -205,20 +205,20 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 6, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'heavy', 'attacked_heavy_bottom', 120 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'heavy', 'attacked_heavy_bottom', 120 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 4, false ],
 					effect_position: [ 0, 80 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_boxing.mp3' ]
 				},
-				/******************** ÍÈ *********************/
+				/******************** ï¿½ï¿½ *********************/
 				light_kick: {
 					bg: 'RYU1_light_kick',
 					framesNum: 5,
 					repeat: [ 1, 1, 2, 1, 1 ],
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: -50,
 					attack_type: 2,
-					attack_config: [ 10, 40, 120, 0, 150, 'linear', 'light', 'attacked_light_top', 30 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 40, 120, 0, 150, 'linear', 'light', 'attacked_light_top', 30 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 0 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -229,7 +229,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'linear' ],
 					near: 140,
 					attack_type: 2,
-					attack_config: [ 10, 150, 110, 0, 100, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 150, 110, 0, 100, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -239,7 +239,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 3, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 100, 210, 0, 150, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 100, 210, 0, 150, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 3, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -249,7 +249,7 @@ var Config = {
 					framesNum: 5,
 					easing: [ 0, 0, 6, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 10, 120, 160, -100, 200, 'linear', 'heavy', 'attacked_heavy_top', 150 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 120, 160, -100, 200, 'linear', 'heavy', 'attacked_heavy_top', 150 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, -20 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
@@ -261,7 +261,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'easeIn' ],
 					near: 160,
 					attack_type: 2,
-					attack_config: [ 10, 90, 110, 0, 150, 'linear', 'heavy', 'attacked_heavy_top', 160 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 90, 110, 0, 150, 'linear', 'heavy', 'attacked_heavy_top', 160 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, -20 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
@@ -271,19 +271,19 @@ var Config = {
 					framesNum: 5,
 					easing: [ 0, 0, 6, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 10, 50, 230, 0, 150, 'linear', 'heavy', 'crouch_kick_attacked_fall', 130 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 50, 230, 0, 150, 'linear', 'heavy', 'crouch_kick_attacked_fall', 130 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 4, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
 				},
-				/******************** ÌØÊâ¼¼ÄÜ *********************/
+				/******************** ï¿½ï¿½ï¿½â¼¼ï¿½ï¿½ *********************/
 				jump_light_impact_boxing: {
 					bg: 'RYU1_impact_boxing',
 					framesNum: 3,
 					repeat: [ 1, 2, 4 ],
 					easing: [ 10, -120, 3, 'strongEaseOut' ],
 					attack_type: 2,
-					attack_config: [ 150, 130, 0, -120, 100, 'linear', 'heavy', 'heavy_attacked_fall_down', 150 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 150, 130, 0, -120, 100, 'linear', 'heavy', 'heavy_attacked_fall_down', 150 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 9, true ],
 					effect_position: [ 70, -20 ],
 					sound: [ '', 'sound/hit_heavy_boxing.mp3' ],
@@ -295,7 +295,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 120, 6, 'strongEaseIn' ],
 					attack_type: 0,
-					attack_power: [ 0, false ]  //power_level, ÎÞµÐ.
+					attack_power: [ 0, false ]  //power_level, ï¿½Þµï¿½.
 				},
 				jump_heavy_impact_boxing: {
 					bg: 'RYU1_impact_boxing',
@@ -315,7 +315,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 180, 12, 'strongEaseIn' ],
 					attack_type: 0,
-					attack_power: [ 0, false ]  //power_level, ÎÞµÐ.
+					attack_power: [ 0, false ]  //power_level, ï¿½Þµï¿½.
 				},
 				before_jump_whirl_kick: {
 					bg: 'RYU1_before_whirl_kick',
@@ -335,7 +335,7 @@ var Config = {
 					framesNum: 4,
 					easing: [ 90, 0, 3, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 50, 120, 370, 0, 150, 'linear', 'heavy', 'heavy_attacked_fall_down', 180 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 50, 120, 370, 0, 150, 'linear', 'heavy', 'heavy_attacked_fall_down', 180 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 8, false ],
 					effect_position: [ 70, -30 ],
 					sound: [ '', 'sound/hit_heavy_kick.mp3' ],
@@ -374,7 +374,7 @@ var Config = {
 					attack_config: [ 7, 116, 0, 0, 'transverseWaveDisappear', 'attacked_heavy_impact', 120, 20 ]
 				},
 				
-/******************************** ±»»÷´ò ****************************************/
+/******************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ****************************************/
 
 				before_crouch_kick_attacked_fall: {
 					bg: 'RYU1_beAttacked_fall',
@@ -532,7 +532,7 @@ var Config = {
 					attack_type: 3,
 					attack_power: [ 0, true ]
 				},
-	/******************************** ×éºÏ¼¼ÄÜ **************************************/			
+	/******************************** ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ **************************************/			
 				combo: {
 					jump_light_boxing: {
 						bg: 'RYU1_jump_light_boxing',
@@ -540,7 +540,7 @@ var Config = {
 						repeat: [ 3, 36 ],
 						attack_type: 2,
 						attack_config: [ 150, 100, 40, 0, 'heavy', 'attacked_light_top', 30 ],
-						afterFrame: 1,  //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 1,  //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 5, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -562,7 +562,7 @@ var Config = {
 						repeat: [ 3, 6 ],
 						attack_type: 2,
 						attack_config: [ 170, 50, 50, 0, 'heavy', 'attacked_light_top', 40 ],
-						afterFrame: 3,   //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 3,   //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 5, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -573,7 +573,7 @@ var Config = {
 						repeat: [ 3, 3, 6, 3, 3 ],
 						attack_type: 2,
 						attack_config: [ 170, 100, 50, 0, 'heavy', 'attacked_heavy_top', 120 ],
-						afterFrame: 1,   //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 1,   //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 7, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
@@ -669,7 +669,8 @@ var Config = {
 					'85': 'u',
 					'73': 'i',
 					'74': 'j',
-					'75': 'k'
+					'75': 'k',
+					'90': 'z'
 				},
 				move: {
 					'w': 'jump',
@@ -709,8 +710,8 @@ var Config = {
 						'crouch,back,heavy_kick': 'jump_whirl_kick',
 						'crouch,stand_crouch_defense,back,light_kick': 'light_jump_whirl_kick',
 						'crouch,stand_crouch_defense,back,heavy_kick': 'jump_whirl_kick',
-						'crouch,forward,light_boxing': 'light_wave_boxing',
-						'crouch,forward,heavy_boxing': 'heavy_wave_boxing',
+						//'crouch,forward,light_boxing': 'light_wave_boxing',
+						//'crouch,forward,heavy_boxing': 'heavy_wave_boxing',
 						'forward,crouch,forward,light_boxing': 'jump_light_impact_boxing',
 						'forward,crouch,forward,crouch,light_boxing': 'jump_light_impact_boxing',
 						'forward,crouch,forward,heavy_boxing': 'jump_heavy_impact_boxing',
@@ -720,7 +721,9 @@ var Config = {
 						'j': 'light_boxing',
 						'k': 'heavy_boxing',
 						'u': 'light_kick',
-						'i': 'heavy_kick'
+						'i': 'heavy_kick',
+						'z' : 'heavy_wave_boxing',
+
 					}
 				}
 			}
@@ -730,7 +733,7 @@ var Config = {
 			name: 'RYU2',
 			states: {
 				default: 'wait',
-				/******************** ÒÆ¶¯ *********************/
+				/******************** ï¿½Æ¶ï¿½ *********************/
 				wait: {
 					bg: 'RYU2_wait',
 					framesNum: 6,
@@ -808,7 +811,7 @@ var Config = {
 					easing: [ 0, 0, 5, 'easeIn' ],
 					attack_type: 1
 				},
-				/******************** ÌøÔ¾ *********************/
+				/******************** ï¿½ï¿½Ô¾ *********************/
 				jumpUp: {
 					bg: 'RYU2_jumpUp',
 					framesNum: 8,
@@ -856,10 +859,10 @@ var Config = {
 				light_boxing: {
 					bg: 'RYU2_light_boxing',
 					framesNum: 3,
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: 7,
 					attack_type: 2,
-					attack_config: [ 10, 60, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 20 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 20 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 20 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -870,7 +873,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'linear' ],
 					near: 130,
 					attack_type: 2,
-					attack_config: [ 10, 45, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 25 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 45, 110, 0, 100, 'linear', 'light', 'attacked_light_top', 25 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 10 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -878,10 +881,10 @@ var Config = {
 				heavy_boxing: {
 					bg: 'RYU2_middle_boxing',
 					framesNum: 5,
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: 7,
 					attack_type: 2,
-					attack_config: [ 10, 60, 120, 0, 150, 'linear', 'heavy', 'attacked_heavy', 120 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 120, 0, 150, 'linear', 'heavy', 'attacked_heavy', 120 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, 25 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_boxing.mp3' ]
@@ -903,7 +906,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 6, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'light', 'attacked_light_bottom', 30 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'light', 'attacked_light_bottom', 30 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 3, false ],
 					effect_position: [ 0, 80 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -913,20 +916,20 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 6, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'heavy', 'attacked_heavy_bottom', 120 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 60, 150, 0, 150, 'linear', 'heavy', 'attacked_heavy_bottom', 120 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 4, false ],
 					effect_position: [ 0, 80 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_boxing.mp3' ]
 				},
-				/******************** ÍÈ *********************/
+				/******************** ï¿½ï¿½ *********************/
 				light_kick: {
 					bg: 'RYU2_light_kick',
 					framesNum: 5,
 					repeat: [ 1, 1, 2, 1, 1 ],
-					easing: [ 0, 0, 3, 'linear' ],   //left, top, ¼¸Õë»­Ò»´Î, Ëã·¨,
+					easing: [ 0, 0, 3, 'linear' ],   //left, top, ï¿½ï¿½ï¿½ë»­Ò»ï¿½ï¿½, ï¿½ã·¨,
 					position: -50,
 					attack_type: 2,
-					attack_config: [ 10, 40, 120, 0, 150, 'linear', 'light', 'attacked_light_top', 30 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 40, 120, 0, 150, 'linear', 'light', 'attacked_light_top', 30 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 0 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -937,7 +940,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'linear' ],
 					near: 140,
 					attack_type: 2,
-					attack_config: [ 10, 150, 110, 0, 100, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 150, 110, 0, 100, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 1, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -947,7 +950,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 0, 3, 'linear' ],
 					attack_type: 2,
-					attack_config: [ 10, 100, 210, 0, 150, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 100, 210, 0, 150, 'linear', 'light', 'attacked_light_bottom', 40 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 3, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -957,7 +960,7 @@ var Config = {
 					framesNum: 5,
 					easing: [ 0, 0, 6, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 10, 120, 160, -100, 200, 'linear', 'heavy', 'attacked_heavy_top', 150 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 120, 160, -100, 200, 'linear', 'heavy', 'attacked_heavy_top', 150 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, -20 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
@@ -969,7 +972,7 @@ var Config = {
 					easing: [ 0, 0, 3, 'easeIn' ],
 					near: 160,
 					attack_type: 2,
-					attack_config: [ 10, 90, 110, 0, 150, 'linear', 'heavy', 'attacked_heavy_top', 160 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 90, 110, 0, 150, 'linear', 'heavy', 'attacked_heavy_top', 160 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 2, false ],
 					effect_position: [ 0, -20 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
@@ -979,19 +982,19 @@ var Config = {
 					framesNum: 5,
 					easing: [ 0, 0, 6, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 10, 50, 230, 0, 150, 'linear', 'heavy', 'crouch_kick_attacked_fall', 130 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 10, 50, 230, 0, 150, 'linear', 'heavy', 'crouch_kick_attacked_fall', 130 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 4, false ],
 					effect_position: [ 0, 140 ],
 					sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
 				},
-				/******************** ÌØÊâ¼¼ÄÜ *********************/
+				/******************** ï¿½ï¿½ï¿½â¼¼ï¿½ï¿½ *********************/
 				jump_light_impact_boxing: {
 					bg: 'RYU2_impact_boxing',
 					framesNum: 3,
 					repeat: [ 1, 2, 4 ],
 					easing: [ 10, -120, 3, 'strongEaseOut' ],
 					attack_type: 2,
-					attack_config: [ 150, 130, 0, -120, 100, 'linear', 'heavy', 'heavy_attacked_fall_down', 150 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 150, 130, 0, -120, 100, 'linear', 'heavy', 'heavy_attacked_fall_down', 150 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 9, true ],
 					effect_position: [ 70, -20 ],
 					sound: [ '', 'sound/hit_heavy_boxing.mp3' ],
@@ -1003,7 +1006,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 120, 6, 'strongEaseIn' ],
 					attack_type: 0,
-					attack_power: [ 0, false ]  //power_level, ÎÞµÐ.
+					attack_power: [ 0, false ]  //power_level, ï¿½Þµï¿½.
 				},
 				jump_heavy_impact_boxing: {
 					bg: 'RYU2_impact_boxing',
@@ -1023,7 +1026,7 @@ var Config = {
 					framesNum: 3,
 					easing: [ 0, 180, 12, 'strongEaseIn' ],
 					attack_type: 0,
-					attack_power: [ 0, false ]  //power_level, ÎÞµÐ.
+					attack_power: [ 0, false ]  //power_level, ï¿½Þµï¿½.
 				},
 				before_jump_whirl_kick: {
 					bg: 'RYU2_before_whirl_kick',
@@ -1043,7 +1046,7 @@ var Config = {
 					framesNum: 4,
 					easing: [ 90, 0, 3, 'easeIn' ],
 					attack_type: 2,
-					attack_config: [ 50, 120, 370, 0, 150, 'linear', 'heavy', 'heavy_attacked_fall_down', 180 ],  //Æ«ÒÆx, Æ«ÒÆy, left, top, timer, easing
+					attack_config: [ 50, 120, 370, 0, 150, 'linear', 'heavy', 'heavy_attacked_fall_down', 180 ],  //Æ«ï¿½ï¿½x, Æ«ï¿½ï¿½y, left, top, timer, easing
 					attack_power: [ 8, false ],
 					effect_position: [ 70, -30 ],
 					sound: [ '', 'sound/hit_heavy_kick.mp3' ],
@@ -1082,7 +1085,7 @@ var Config = {
 					attack_config: [ 7, 116, 0, 0, 'transverseWaveDisappear', 'attacked_heavy_impact', 120, 20 ]
 				},
 				
-/******************************** ±»»÷´ò ****************************************/
+/******************************** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ****************************************/
 
 				before_crouch_kick_attacked_fall: {
 					bg: 'RYU2_beAttacked_fall',
@@ -1240,7 +1243,7 @@ var Config = {
 					attack_type: 3,
 					attack_power: [ 0, true ]
 				},
-	/******************************** ×éºÏ¼¼ÄÜ **************************************/			
+	/******************************** ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ **************************************/			
 				combo: {
 					jump_light_boxing: {
 						bg: 'RYU2_jump_light_boxing',
@@ -1248,7 +1251,7 @@ var Config = {
 						repeat: [ 3, 36 ],
 						attack_type: 2,
 						attack_config: [ 150, 100, 40, 0, 'heavy', 'attacked_light_top', 30 ],
-						afterFrame: 1,  //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 1,  //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 5, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -1270,7 +1273,7 @@ var Config = {
 						repeat: [ 3, 6 ],
 						attack_type: 2,
 						attack_config: [ 170, 50, 50, 0, 'heavy', 'attacked_light_top', 40 ],
-						afterFrame: 3,   //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 3,   //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 5, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/light_boxing.mp3', 'sound/hit_light.mp3' ]
@@ -1281,7 +1284,7 @@ var Config = {
 						repeat: [ 3, 3, 6, 3, 3 ],
 						attack_type: 2,
 						attack_config: [ 170, 100, 50, 0, 'heavy', 'attacked_heavy_top', 120 ],
-						afterFrame: 1,   //Íê³ÉÖ®ºóÍ£ÁôÔÚÖ®Ç°¶¯×÷µÄµ¹ÊýµÚ¼¸Õë.
+						afterFrame: 1,   //ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½.
 						attack_power: [ 7, false ],
 						effect_position: [ 0, 10 ],
 						sound: [ 'sound/heavy_boxing.mp3', 'sound/hit_heavy_kick.mp3' ]
