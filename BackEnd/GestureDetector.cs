@@ -27,7 +27,12 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private readonly string kickGestureName = "LowKick";
 
         private readonly string hadukenGestureName = "Haduken";
-   
+
+        private readonly string punchProgressGestureName = "PunchProg";
+
+        private readonly string kickProgressGestureName = "KickProg";
+
+        private readonly string hadukProgressGestureName = "HadukenProg";
 
 
         /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
@@ -171,74 +176,154 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                 {
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, DiscreteGestureResult> discreteResults = frame.DiscreteGestureResults;
+                    IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
 
                     if (discreteResults != null)
                     {
+                        bool punchStarted = this.GestureResultView.PunchStarted;
+                        bool kickStarted = this.GestureResultView.KickStarted;
+                        bool hadukStarted = this.GestureResultView.HadukStarted;
+                        float punchProgess = this.GestureResultView.PunchProgress;
+                        float kickProgress = this.GestureResultView.KickProgress;
+                        float hadukProgress = this.GestureResultView.HadukProgress;
+
                         // we only have one gesture in this source object, but you can get multiple gestures
                         foreach (Gesture gesture in this.vgbFrameSource.Gestures)
                         {
                             //Console.WriteLine("Current Gesture: " + gesture.Name);
 
-                            if (gesture.Name.Equals(this.hadukenGestureName) && gesture.GestureType == GestureType.Discrete)
+                            if(gesture.GestureType == GestureType.Discrete)
                             {
                                 DiscreteGestureResult result = null;
                                 discreteResults.TryGetValue(gesture, out result);
 
-                                if (result != null)
+                                if(result != null)
                                 {
-                                    // update the GestureResultView object with new gesture result values
-                                    this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                                    if (result.Confidence > 0.5)
-                                    {
-                                        Console.WriteLine("Haduken");
-                                        Console.WriteLine(result.Detected);
-                                        Console.WriteLine(result.Confidence);
-                                        SendKeys.SendWait("{Z}");
+                                    if(gesture.Name.Equals(this.punchGestureName)){
+                                        punchStarted = result.Detected;
+                                    }
+                                    else if (gesture.Name.equals(this.kickGestureName)){
+                                        kickStarted = result.Detected;
+                                    }
+                                    else if (gesture.Name.equals(this.hadukenGestureName)){
+                                        hadukStarted = result.Detected;
                                     }
                                 }
                             }
 
-                            else if (gesture.Name.Equals(this.punchGestureName) && gesture.GestureType == GestureType.Discrete)
+                            if (continuousResults != null)
                             {
-                                DiscreteGestureResult result = null;
-                                discreteResults.TryGetValue(gesture, out result);
-
-                                if (result != null)
+                                if (gesture.GestureType == GestureType.Continuous)
                                 {
-                                    // update the GestureResultView object with new gesture result values
-                                    this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                                    if (result.Confidence > 0.8)
+                                    ContinuousGestureResult result = null;
+                                    continuousResults.TryGetValue(gesture, out result);
+                                    if(result != null)
                                     {
-                                        Console.WriteLine("Punch");
-                                        Console.WriteLine(result.Detected);
-                                        Console.WriteLine(result.Confidence);
-                                        SendKeys.SendWait("{K}");
+                                        if(gesture.Name.Equals(this.punchProgressGestureName)){
+                                            punchProgess = result.Progress;
+                                        }
+                                        else if (gesture.Name.equals(this.kickProgressGestureName)){
+                                            kickProgress = result.Progress;
+                                        }
+                                        else if (gesture.Name.Equals(this.hadukenGestureName)){
+                                            hadukProgress = result.Progress;
+                                        }
                                     }
                                 }
                             }
+                            // if (gesture.Name.Equals(this.hadukenGestureName) && gesture.GestureType == GestureType.Discrete)
+                            // {
+                            //     DiscreteGestureResult result = null;
+                            //     discreteResults.TryGetValue(gesture, out result);
+
+                            //     if (result != null)
+                            //     {
+                            //         // update the GestureResultView object with new gesture result values
+                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
+                            //         if (result.Confidence > 0.5)
+                            //         {
+                            //             Console.WriteLine("Haduken");
+                            //             Console.WriteLine(result.Detected);
+                            //             Console.WriteLine(result.Confidence);
+                            //             SendKeys.SendWait("{Z}");
+                            //         }
+                            //     }
+                            // }
+
+                            // else if (gesture.Name.Equals(this.punchGestureName) && gesture.GestureType == GestureType.Discrete)
+                            // {
+                            //     DiscreteGestureResult result = null;
+                            //     discreteResults.TryGetValue(gesture, out result);
+
+                            //     if (result != null)
+                            //     {
+                            //         // update the GestureResultView object with new gesture result values
+                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
+                            //         if (result.Confidence > 0.8)
+                            //         {
+                            //             Console.WriteLine("Punch");
+                            //             Console.WriteLine(result.Detected);
+                            //             Console.WriteLine(result.Confidence);
+                            //             SendKeys.SendWait("{K}");
+                            //         }
+                            //     }
+                            // }
                             
-                            if (gesture.Name.Equals(this.kickGestureName) && gesture.GestureType == GestureType.Discrete)
-                            {
-                                DiscreteGestureResult result = null;
-                                discreteResults.TryGetValue(gesture, out result);
+                            // if (gesture.Name.Equals(this.kickGestureName) && gesture.GestureType == GestureType.Discrete)
+                            // {
+                            //     DiscreteGestureResult result = null;
+                            //     discreteResults.TryGetValue(gesture, out result);
 
-                                if (result != null)
-                                {
-                                    // update the GestureResultView object with new gesture result values
-                                    this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                                    if (result.Confidence > 0.005)
-                                    {
-                                        Console.WriteLine("Kick");
-                                        Console.WriteLine(result.Detected);
-                                        Console.WriteLine(result.Confidence);
-                                        SendKeys.SendWait("{I}");
-                                    }
-                                }
-                            }
+                            //     if (result != null)
+                            //     {
+                            //         // update the GestureResultView object with new gesture result values
+                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
+                            //         if (result.Confidence > 0.005)
+                            //         {
+                            //             Console.WriteLine("Kick");
+                            //             Console.WriteLine(result.Detected);
+                            //             Console.WriteLine(result.Confidence);
+                            //             SendKeys.SendWait("{I}");
+                            //         }
+                            //     }
+                            // }
                             
                             
                             
                         }
+
+                        if(punchStarted){
+                            punchStarted = true;
+                        }
+                        if(kickStarted){
+                            kickStarted = true;
+                        }
+                        if(hadukStarted){
+                            hadukStarted = true;
+                        }
+
+                        if(punchProgess < 0){
+                            punchProgess = 0;
+                        }
+                        else if (punchProgess > 1){
+                            punchProgress= 1;
+                        }
+
+                        if(kickProgress < 0){
+                            kickProgress = 0;
+                        }
+                        else if (kickProgress > 1){
+                            kickProgress = 1;
+                        }
+
+                        if(hadukProgress < 0){
+                            hadukProgress = 0;
+                        }
+                        else if (hadukProgress > 1){
+                            hadukProgress = 1;
+                        }
+
+                        this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgess, kickProgress, hadukProgress);
                     }
                 }
             }

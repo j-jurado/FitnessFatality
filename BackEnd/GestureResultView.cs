@@ -48,6 +48,17 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         /// <summary> True, if the body is currently being tracked </summary>
         private bool isTracked = false;
 
+        //Added by us
+        private bool punchStarted = false;
+        private bool kickStarted = false;
+        private bool hadukStarted = false;
+
+        private float punchProgress = 0.0f;
+        private float kickProgress = 0.0f;
+        private float hadukProgress = 0.0f;
+
+        private SpaceView spaceView = null;
+
         /// <summary>
         /// Initializes a new instance of the GestureResultView class and sets initial property values
         /// </summary>
@@ -55,13 +66,30 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         /// <param name="isTracked">True, if the body is currently tracked</param>
         /// <param name="detected">True, if the gesture is currently detected for the associated body</param>
         /// <param name="confidence">Confidence value for detection of the 'Seated' gesture</param>
-        public GestureResultView(int bodyIndex, bool isTracked, bool detected, float confidence)
+
+        // public GestureResultView(int bodyIndex, bool isTracked, bool detected, float confidence)
+        // {
+        //     this.BodyIndex = bodyIndex;
+        //     this.IsTracked = isTracked;
+        //     this.Detected = detected;
+        //     this.Confidence = confidence;
+        //     this.ImageSource = this.notTrackedImage;
+        // }
+
+        public GestureResultView(int isTracked, bool punch, bool kick, bool haduken, float punchProg, float kickProg, float hadukProg, SpaceView space)
         {
-            this.BodyIndex = bodyIndex;
+            if(space == null)
+            {
+                throw new ArgumentNullException("spaceview");
+            }
+
             this.IsTracked = isTracked;
-            this.Detected = detected;
-            this.Confidence = confidence;
-            this.ImageSource = this.notTrackedImage;
+            this.PunchStarted = punch;
+            this.KickStarted = kick;
+            this.HadukStarted = haduken;
+            this.PunchProgress = punchProg;
+            this.KickProgress = kickProg;
+            this.HadukProgress = hadukProg;
         }
 
         /// <summary>
@@ -149,6 +177,86 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             }
         }
 
+        //Added by us
+        //Discrete
+        public bool PunchStarted
+        {
+            get
+            {
+                return this.punchStarted;
+            }
+
+            private set
+            {
+                this.SetProperty(ref this.punchStarted, value);
+            }
+        }
+
+        public bool KickStarted
+        {
+            get
+            {
+                return this.kickStarted;
+            }
+
+            private set
+            {
+                this.SetProperty(ref this.kickStarted, value);
+            }
+        }
+
+        public bool HadukStarted
+        {
+            get
+            {
+                return this.hadukStarted;
+            }
+
+            private set
+            {
+                this.SetProerty(ref this.hadukStarted, value);
+            }
+        }
+
+        //Continuous
+        public float PunchProgress
+        {
+            get
+            {
+                return this.punchProgress;
+            }
+
+            private set
+            {
+                this.SetProperty(ref this.punchProgress, value);
+            }
+        }
+
+        public float KickProgress
+        {
+            get
+            {
+                return this.kickProgress;
+            }
+
+            private set
+            {
+                this.SetProperty(ref this.kickProgress, value);
+            }
+        }
+
+        public float HadukProgress
+        {
+            get
+            {
+                return this.hadukProgress;
+            }
+
+            private set
+            {
+                this.SetProperty(ref this.hadukProgress, value);
+            }
+        }
         /// <summary> 
         /// Gets a float value which indicates the detector's confidence that the gesture is occurring for the associated body 
         /// </summary>
@@ -195,31 +303,48 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         /// <param name="isBodyTrackingIdValid">True, if the body associated with the GestureResultView object is still being tracked</param>
         /// <param name="isGestureDetected">True, if the discrete gesture is currently detected for the associated body</param>
         /// <param name="detectionConfidence">Confidence value for detection of the discrete gesture</param>
-        public void UpdateGestureResult(bool isBodyTrackingIdValid, bool isGestureDetected, float detectionConfidence)
+        // public void UpdateGestureResult(bool isBodyTrackingIdValid, bool isGestureDetected, float detectionConfidence)
+        public void UpdateGestureResult(bool isBodyTrackingIdValid, bool punch, bool kick, bool haduk, float punchProg, float kickProg, float hadukProg)
         {
             this.IsTracked = isBodyTrackingIdValid;
-            this.Confidence = 0.0f;
+            //this.Confidence = 0.0f;
 
             if (!this.IsTracked)
             {
-                this.ImageSource = this.notTrackedImage;
-                this.Detected = false;
-                this.BodyColor = Brushes.Gray;
+                // this.ImageSource = this.notTrackedImage;
+                // this.Detected = false;
+                // this.BodyColor = Brushes.Gray;
+
+                //Added by us
+                this.PunchStarted = false;
+                this.KickStarted = false;
+                this.HadukStarted = false;
+                this.PunchProgress = -1.0f;
+                this.KickProgress = -1.0f;
+                this.HadukProgress = -1.0f;
             }
             else
             {
-                this.Detected = isGestureDetected;
-                this.BodyColor = this.trackedColors[this.BodyIndex];
+                // this.Detected = isGestureDetected;
+                // this.BodyColor = this.trackedColors[this.BodyIndex];
 
-                if (this.Detected)
-                {
-                    this.Confidence = detectionConfidence;
-                    this.ImageSource = this.seatedImage;
-                }
-                else
-                {
-                    this.ImageSource = this.notSeatedImage;
-                }
+                //Added by us
+                this.PunchStarted = punch;
+                this.KickStarted = kick;
+                this.HadukStarted = haduk;
+                this.PunchProgress = punchProg;
+                this.KickProgress = kickProg;
+                this.HadukProgress = hadukProg;
+
+                // if (this.Detected)
+                // {
+                //     this.Confidence = detectionConfidence;
+                //     this.ImageSource = this.seatedImage;
+                // }
+                // else
+                // {
+                //     this.ImageSource = this.notSeatedImage;
+                // }
             }
         }
 
