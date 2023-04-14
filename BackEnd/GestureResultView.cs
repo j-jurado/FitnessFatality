@@ -57,7 +57,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private float kickProgress = 0.0f;
         private float hadukProgress = 0.0f;
 
-        private SpaceView spaceView = null;
+        //private SpaceView spaceView = null;
 
         /// <summary>
         /// Initializes a new instance of the GestureResultView class and sets initial property values
@@ -76,14 +76,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         //     this.ImageSource = this.notTrackedImage;
         // }
 
-        public GestureResultView(int isTracked, bool punch, bool kick, bool haduken, float punchProg, float kickProg, float hadukProg, SpaceView space)
+        public GestureResultView(int isTracked, bool punch, bool kick, bool haduken, float punchProg, float kickProg, float hadukProg)
         {
-            if(space == null)
-            {
-                throw new ArgumentNullException("spaceview");
-            }
+            //if(space == null)
+            //{
+            //    throw new ArgumentNullException("spaceview");
+            //}
 
-            this.IsTracked = isTracked;
+            //this.IsTracked = isTracked;
             this.PunchStarted = punch;
             this.KickStarted = kick;
             this.HadukStarted = haduken;
@@ -188,7 +188,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProperty(ref this.punchStarted, value);
+               // this.SetProperty(ref this.punchStarted, value);
             }
         }
 
@@ -201,7 +201,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProperty(ref this.kickStarted, value);
+                //this.SetProperty(ref this.kickStarted, value);
             }
         }
 
@@ -214,7 +214,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProerty(ref this.hadukStarted, value);
+               // this.SetProerty(ref this.hadukStarted, value);
             }
         }
 
@@ -228,7 +228,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProperty(ref this.punchProgress, value);
+               // this.SetProperty(ref this.punchProgress, value);
             }
         }
 
@@ -241,7 +241,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProperty(ref this.kickProgress, value);
+               // this.SetProperty(ref this.kickProgress, value);
             }
         }
 
@@ -254,7 +254,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
             private set
             {
-                this.SetProperty(ref this.hadukProgress, value);
+               // this.SetProperty(ref this.hadukProgress, value);
             }
         }
         /// <summary> 

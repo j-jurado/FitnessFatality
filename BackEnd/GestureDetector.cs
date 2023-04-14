@@ -22,17 +22,17 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private readonly string gestureDatabase = @"Database\Seated.gbd";
 
         /// <summary> Name of the discrete gesture in the database that we want to track </summary>
-        private readonly string punchGestureName = "Punch";
+        private readonly string punchGestureName = "PunchStart";
 
-        private readonly string kickGestureName = "LowKick";
+        private readonly string kickGestureName = "KickStart";
 
-        private readonly string hadukenGestureName = "Haduken";
+        private readonly string hadukenGestureName = "HadukStart";
 
-        private readonly string punchProgressGestureName = "PunchProg";
+        private readonly string punchProgressGestureName = "PunchProgress";
 
-        private readonly string kickProgressGestureName = "KickProg";
+        private readonly string kickProgressGestureName = "KickProgress";
 
-        private readonly string hadukProgressGestureName = "HadukenProg";
+        private readonly string hadukProgressGestureName = "HadukenProgress";
 
 
         /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
@@ -183,7 +183,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                         bool punchStarted = this.GestureResultView.PunchStarted;
                         bool kickStarted = this.GestureResultView.KickStarted;
                         bool hadukStarted = this.GestureResultView.HadukStarted;
-                        float punchProgess = this.GestureResultView.PunchProgress;
+                        float punchProgress = this.GestureResultView.PunchProgress;
                         float kickProgress = this.GestureResultView.KickProgress;
                         float hadukProgress = this.GestureResultView.HadukProgress;
 
@@ -199,13 +199,13 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
                                 if(result != null)
                                 {
-                                    if(gesture.Name.Equals(this.punchGestureName)){
+                                    if(gesture.Name.Equals(this.punchGestureName) && result.Confidence >= 0.9){
                                         punchStarted = result.Detected;
                                     }
-                                    else if (gesture.Name.equals(this.kickGestureName)){
+                                    else if (gesture.Name.Equals(this.kickGestureName) && result.Confidence >= 0.8){
                                         kickStarted = result.Detected;
                                     }
-                                    else if (gesture.Name.equals(this.hadukenGestureName)){
+                                    else if (gesture.Name.Equals(this.hadukenGestureName)){
                                         hadukStarted = result.Detected;
                                     }
                                 }
@@ -220,9 +220,9 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                     if(result != null)
                                     {
                                         if(gesture.Name.Equals(this.punchProgressGestureName)){
-                                            punchProgess = result.Progress;
+                                            punchProgress = result.Progress;
                                         }
-                                        else if (gesture.Name.equals(this.kickProgressGestureName)){
+                                        else if (gesture.Name.Equals(this.kickProgressGestureName)){
                                             kickProgress = result.Progress;
                                         }
                                         else if (gesture.Name.Equals(this.hadukenGestureName)){
@@ -302,10 +302,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             hadukStarted = true;
                         }
 
-                        if(punchProgess < 0){
-                            punchProgess = 0;
+                        if(punchProgress < 0){
+                            punchProgress = 0;
                         }
-                        else if (punchProgess > 1){
+                        else if (punchProgress > 1){
                             punchProgress= 1;
                         }
 
@@ -323,7 +323,23 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             hadukProgress = 1;
                         }
 
-                        this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgess, kickProgress, hadukProgress);
+                        if (punchStarted && (punchProgress > 0.8))
+                        {
+                            Console.WriteLine("Punch Thrown");
+                            punchStarted= false;
+                        }
+                        else if (kickStarted && (kickProgress > 0.8))
+                        {
+                            Console.WriteLine("Kick Thrown");
+                            kickStarted= false;
+;                       }
+                        else if (hadukStarted && (hadukProgress > 0.9))
+                        {
+                            Console.WriteLine("HADUKEN!!");
+                            hadukStarted= false;
+                        }
+
+                        this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgress, kickProgress, hadukProgress);
                     }
                 }
             }
@@ -337,7 +353,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         private void Source_TrackingIdLost(object sender, TrackingIdLostEventArgs e)
         {
             // update the GestureResultView object to show the 'Not Tracked' image in the UI
-            this.GestureResultView.UpdateGestureResult(false, false, 0.0f);
+            this.GestureResultView.UpdateGestureResult(false, false, false, false, 0.0f, 0.0f, 0.0f);
         }
     }
 }
