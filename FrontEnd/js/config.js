@@ -38,25 +38,25 @@ var Config = {
 				back: {
 					bg: 'RYU1_goBack',
 					framesNum: 6,
-					easing: [ -120, 0, 6, 'linear' ],
+					easing: [ -300, 0, 6, 'linear' ],
 					attack_type: 0
 				},
 				force_back: {
 					bg: 'RYU1_goBack',
 					framesNum: 6,
-					easing: [ -120, 0, 6, 'linear' ],
+					easing: [ -300, 0, 6, 'linear' ],
 					attack_type: 0
 				},
 				forward: {
 					bg: 'RYU1_goForward',
 					framesNum: 6,
-					easing: [ 150, 0, 6, 'linear' ],
+					easing: [ 300, 0, 6, 'linear' ],
 					attack_type: 0
 				},
 				force_forward: {
 					bg: 'RYU1_goForward',
 					framesNum: 6,
-					easing: [ 150, 0, 6, 'linear' ],
+					easing: [ 300, 0, 6, 'linear' ],
 					attack_type: 0
 				},
 				stand_up: {
