@@ -29,6 +29,8 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
         private readonly string hadukenGestureName = "HadukStart";
 
+        private readonly string jumpingJacksGestureName = "JumpingJacks";
+
         private readonly string punchProgressGestureName = "PunchProgress";
 
         private readonly string kickProgressGestureName = "KickProgress";
@@ -38,13 +40,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         bool punchStarted = false;
         bool kickStarted = false;
         bool hadukStarted = false;
+        bool jumpingJacksStarted = false;
         float punchProgress = 0.0f;
         float kickProgress = 0.0f;
         float hadukProgress = 0.0f;
         float punchConfidence= 0.0f;
         float kickConfidence = 0.0f;
         float hadukConfidence= 0.0f;
-
+        float jumpingJacksConfidence= 0.0f;
 
 
         /// <summary> Gesture frame source which should be tied to a body tracking ID </summary>
@@ -124,28 +127,28 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             double leanAngle = Math.Atan2(spineMidJoint.Position.Z - spineBaseJoint.Position.Z, spineMidJoint.Position.X - spineBaseJoint.Position.X) * 180.0 / Math.PI;
                             
                             leanAngle = Math.Abs(leanAngle);
-                            Console.WriteLine("Lean angle: " + leanAngle);
+                            //Console.WriteLine("Lean angle: " + leanAngle);
                             if (leanAngle > 160)
                             {
-                                Console.WriteLine("<<<<<<<<<<------------");
+                                //Console.WriteLine("<<<<<<<<<<------------");
                                 // Hold down the "A" key for 1 second
                                 // Press the "A" key
+                                // Hold down the "A" key for one second`
                                 // Hold down the "A" key for one second
                                 // Hold down the "A" key for one second
-                                // Hold down the "A" key for one second
-                                SendKeys.SendWait("{A 10}");
+                                //SendKeys.SendWait("{A 10}");
                                 //System.Threading.Thread.Sleep(100);
                                // SendKeys.SendWait("{UP}");
 
                             }
                             if (leanAngle < 20)
                             {
-                                Console.WriteLine("--------->>>>>>>>>>>>>>");
+                                //Console.WriteLine("--------->>>>>>>>>>>>>>");
                                 // Press the "A" key
                                 // Hold down the "A" key for one second
                                 // Hold down the "A" key for one second
                                 // Hold down the "A" key for one second
-                                SendKeys.SendWait("{D 10}");
+                               // SendKeys.SendWait("{D 10}");
                                 //System.Threading.Thread.Sleep(100);
                                 //SendKeys.SendWait("{UP}"); ;
                             }
@@ -276,7 +279,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                         }
                                             punchConfidence = result.Confidence;
                                     }
-                                    else if (gesture.Name.Equals(this.kickGestureName) && result.Confidence >= 0.65){
+                                    else if (gesture.Name.Equals(this.kickGestureName) && result.Confidence >= 0.5){
                                         // Console.WriteLine("Discrete Kick");
                                             kickStarted = result.Detected;
                                             kickConfidence = result.Confidence;
@@ -293,6 +296,11 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                         }
                                             hadukConfidence = result.Confidence;
                                        
+                                    }
+                                    else if (gesture.Name.Equals(this.jumpingJacksGestureName) && result.Confidence >= 0.8)
+                                    {
+                                            jumpingJacksStarted = result.Detected;
+                                            jumpingJacksConfidence = result.Confidence;
                                     }
                                 }
                             }
@@ -447,6 +455,13 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             hadukConfidence= 0;
                             punchConfidence= 0;
                             SendKeys.SendWait("{Z}");
+                        }
+                        else if (jumpingJacksStarted)
+                        {
+                            Console.WriteLine("JUMP");
+                            jumpingJacksStarted= false;
+                            jumpingJacksConfidence= 0;
+                            SendKeys.SendWait("{W}");
                         }
                         
                         this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgress, kickProgress, hadukProgress);
