@@ -78,7 +78,7 @@ var Map = function(){
 	
 		bg.appendChild( ft );
 
-		bg.style.position = 'absolute';
+		bg.style.position = 'relative';
 		bg.style.left = 0;
 		bg.style.top = 0;
 		bg.style.width = '910px';
