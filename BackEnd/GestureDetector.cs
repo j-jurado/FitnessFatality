@@ -38,6 +38,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
         private readonly string hadukProgressGestureName = "HadukProgress";
 
+        // Create a list to store the previously tracked body IDs
+        // This list will be used to track multiple in-game players
+        List<ulong> trackedBodyIds = new List<ulong>();
+
         bool punchStarted = false;
         bool kickStarted = false;
         bool hadukStarted = false;
@@ -123,7 +127,15 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                     {
                         if (body.IsTracked)
                         {
-                            Console.WriteLine("Body Index: " + body.TrackingId);
+                            // Check if this body is already being tracked
+                            if (!trackedBodyIds.Contains(body.TrackingId))
+                            {
+                                // Add the new body to the list
+                                trackedBodyIds.Add(body.TrackingId);
+                            }
+                            int index = trackedBodyIds.IndexOf(body.TrackingId);
+
+                            //Console.WriteLine("Body Index: " + (index % 2));
                             // Calculate the lean angle of the upper body relative to the lower body
                             CameraSpacePoint leftHip = body.Joints[JointType.HipLeft].Position;
                             CameraSpacePoint rightHip = body.Joints[JointType.HipRight].Position;
@@ -135,22 +147,45 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
                             // Calculate the cross product of the hip and shoulder vectors
                             Vector3D crossProduct = Vector3D.CrossProduct(hipVector, shoulderVector);
-
+                            double leanAngle = 0.0;
                             // Calculate the signed lean angle
-                            double leanAngle = Vector3D.AngleBetween(hipVector, shoulderVector) * Math.Sign(crossProduct.Y);
+                            try
+                            {
+                                leanAngle = Vector3D.AngleBetween(hipVector, shoulderVector) * Math.Sign(crossProduct.Y);
+                            }
+                            catch (ArithmeticException ex)
+                            {
+                                return;
+                            }
 
                             //Console.WriteLine("LEAN_ANGLE: " + leanAngle);
-                            if (leanAngle >= 15.0f)
-                            {
-                                //Console.WriteLine("<<<<<<<<<<=================");
-                                //SendKeys.SendWait("{A}");
+                            // Player 1
+                            if ((index % 2) == 0) {
+                                if (leanAngle >= 10.0f)
+                                {
+                                    Console.WriteLine("<<<<<<<<<<=================");
+                                    SendKeys.SendWait("{A}");
+                                }
+                                else if (leanAngle <= -10.0f)
+                                {
+                                    Console.WriteLine("===============>>>>>>>>>>>>");
+                                    SendKeys.SendWait("{D 10}");
+                                }
                             }
-                            else if (leanAngle <= -10.0f)
+                            // Player 2
+                            else
                             {
-                                //Console.WriteLine("===============>>>>>>>>>>>>");
-                                //SendKeys.SendWait("{D 10}");
+                                if (leanAngle >= 10.0f)
+                                {
+                                    Console.WriteLine("<<<<<<<<<<=================");
+                                    SendKeys.SendWait("{LEFT 10}");
+                                }
+                                else if (leanAngle <= -10.0f)
+                                {
+                                    Console.WriteLine("===============>>>>>>>>>>>>");
+                                    SendKeys.SendWait("{RIGHT}");
+                                }
                             }
-
                         }
                     }
                 }
@@ -246,17 +281,17 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                 {
                     // get the discrete gesture results which arrived with the latest frame
                     IReadOnlyDictionary<Gesture, DiscreteGestureResult> discreteResults = frame.DiscreteGestureResults;
-                    IReadOnlyDictionary<Gesture, ContinuousGestureResult> continuousResults = frame.ContinuousGestureResults;
+
+                    // Check if this body is already being tracked
+                    if (!trackedBodyIds.Contains(frame.TrackingId))
+                    {
+                        // Add the new body to the list
+                        trackedBodyIds.Add(frame.TrackingId);
+                    }
+                    int index = trackedBodyIds.IndexOf(frame.TrackingId);
 
                     if (discreteResults != null)
                     {
-                        //Console.WriteLine("Discrete Gesture Detected!");
-                        /*bool punchStarted = this.GestureResultView.PunchStarted;
-                        bool kickStarted = this.GestureResultView.KickStarted;
-                        bool hadukStarted = this.GestureResultView.HadukStarted;
-                        float punchProgress = this.GestureResultView.PunchProgress;
-                        float kickProgress = this.GestureResultView.KickProgress;
-                        float hadukProgress = this.GestureResultView.HadukProgress;*/
 
                         // we only have one gesture in this source object, but you can get multiple gestures
                         foreach (Gesture gesture in this.vgbFrameSource.Gestures)
@@ -303,90 +338,6 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                     }
                                 }
                             }
-                            /*
-                            if (continuousResults != null)
-                            {
-                                //Console.WriteLine("Continuous Gesture Detected");
-                                if (gesture.GestureType == GestureType.Continuous)
-                                {
-                                    ContinuousGestureResult result = null;
-                                    continuousResults.TryGetValue(gesture, out result);
-                                    if(result != null)
-                                    {
-                                        
-                                        if (gesture.Name.Equals(this.punchProgressGestureName)){
-                                            //Console.WriteLine("                  Continuous punch");
-                                            punchProgress = result.Progress;
-                                        }
-                                        if (gesture.Name.Equals(this.kickProgressGestureName)){
-                                            //Console.WriteLine("                          Continuous kick");
-                                            kickProgress = result.Progress;
-                                        }
-                                        if (gesture.Name.Equals(this.hadukProgressGestureName)){
-                                            //Console.WriteLine("_________________" + result.Progress);
-                                            hadukProgress = result.Progress;
-                                        }
-                                    }
-                                }
-                            }
-                            */
-
-                            // if (gesture.Name.Equals(this.hadukenGestureName) && gesture.GestureType == GestureType.Discrete)
-                            // {
-                            //     DiscreteGestureResult result = null;
-                            //     discreteResults.TryGetValue(gesture, out result);
-
-                            //     if (result != null)
-                            //     {
-                            //         // update the GestureResultView object with new gesture result values
-                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                            //         if (result.Confidence > 0.5)
-                            //         {
-                            //             Console.WriteLine("Haduken");
-                            //             Console.WriteLine(result.Detected);
-                            //             Console.WriteLine(result.Confidence);
-                            //             SendKeys.SendWait("{Z}");
-                            //         }
-                            //     }
-                            // }
-
-                            // else if (gesture.Name.Equals(this.punchGestureName) && gesture.GestureType == GestureType.Discrete)
-                            // {
-                            //     DiscreteGestureResult result = null;
-                            //     discreteResults.TryGetValue(gesture, out result);
-
-                            //     if (result != null)
-                            //     {
-                            //         // update the GestureResultView object with new gesture result values
-                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                            //         if (result.Confidence > 0.8)
-                            //         {
-                            //             Console.WriteLine("Punch");
-                            //             Console.WriteLine(result.Detected);
-                            //             Console.WriteLine(result.Confidence);
-                            //             SendKeys.SendWait("{K}");
-                            //         }
-                            //     }
-                            // }
-                            
-                            // if (gesture.Name.Equals(this.kickGestureName) && gesture.GestureType == GestureType.Discrete)
-                            // {
-                            //     DiscreteGestureResult result = null;
-                            //     discreteResults.TryGetValue(gesture, out result);
-
-                            //     if (result != null)
-                            //     {
-                            //         // update the GestureResultView object with new gesture result values
-                            //         this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                            //         if (result.Confidence > 0.005)
-                            //         {
-                            //             Console.WriteLine("Kick");
-                            //             Console.WriteLine(result.Detected);
-                            //             Console.WriteLine(result.Confidence);
-                            //             SendKeys.SendWait("{I}");
-                            //         }
-                            //     }
-                            // }
                             
                             
                             
@@ -401,66 +352,75 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                         if(hadukStarted){
                             hadukStarted = true;
                         }
-                        /*
-                        if(punchProgress < 0){
-                            punchProgress = 0;
-                        }
-                        else if (punchProgress > 1){
-                            punchProgress= 1;
-                        }
 
-                        if(kickProgress < 0){
-                            kickProgress = 0;
-                        }
-                        else if (kickProgress > 1){
-                            kickProgress = 1;
-                        }
-
-                        if(hadukProgress < 0){
-                            hadukProgress = 0;
-                        }
-                        else if (hadukProgress > 1){
-                            hadukProgress = 1;
-                        }
-                        */
-
-                        //Console.WriteLine("Punch Started: " + punchStarted+ " PunchProgress: " + punchProgress);
-                        //Console.WriteLine("Kick Started: " + kickStarted + " KickProgress: " + kickProgress);
-                        //Console.WriteLine("Haduk Started: " + hadukStarted + " hadukProgress: " + hadukProgress);
-                        //Console.WriteLine("Punch Confidence: " + punchConfidence);
-                        //Console.WriteLine("Haduken Confidence: " + hadukConfidence);
-
-                        if (punchStarted && (punchConfidence >= hadukConfidence))
+                        // Player One
+                        if (index % 2 == 0)
                         {
-                            //Console.WriteLine("Punch Thrown");
-                            punchStarted= false;
-                            punchConfidence = 0;
-                            hadukConfidence= 0;
-                            punchProgress = 0;
-                            //SendKeys.SendWait("{K}");
+                            if (punchStarted && (punchConfidence >= hadukConfidence))
+                            {
+                                Console.WriteLine("Punch Thrown");
+                                punchStarted = false;
+                                punchConfidence = 0;
+                                hadukConfidence = 0;
+                                punchProgress = 0;
+                                SendKeys.SendWait("{K}");
+                            }
+                            else if (kickStarted)
+                            {
+                                Console.WriteLine("Kick Thrown");
+                                kickStarted = false;
+                                kickProgress = 0;
+                                SendKeys.SendWait("{I}");
+                            }
+                            else if (hadukStarted && (hadukConfidence <= hadukConfidence))
+                            {
+                                Console.WriteLine("HADUKEN!!");
+                                hadukStarted = false;
+                                hadukProgress = 0;
+                                hadukConfidence = 0;
+                                punchConfidence = 0;
+                                SendKeys.SendWait("{Z}");
+                            }
+                            else if (jumpingJacksStarted)
+                            {
+                                Console.WriteLine("JUMP");
+                                jumpingJacksStarted = false;
+                                jumpingJacksConfidence = 0;
+                                SendKeys.SendWait("{W}");
+                            }
                         }
-                        else if (kickStarted)
+                        // Player Two
+                        else
                         {
-                            //Console.WriteLine("Kick Thrown");
-                            kickStarted= false;
-                            kickProgress = 0;
-                            //SendKeys.SendWait("{I}");
-                        }
-                        else if (hadukStarted && (hadukConfidence <= hadukConfidence))
-                        {
-                            //Console.WriteLine("HADUKEN!!");
-                            hadukStarted= false;
-                            hadukProgress = 0;
-                            hadukConfidence= 0;
-                            punchConfidence= 0;
-                            //SendKeys.SendWait("{Z}");
-                        }
-                        else if (jumpingJacksStarted)
-                        {
-                            Console.WriteLine("JUMP");
-                            jumpingJacksStarted= false;
-                            jumpingJacksConfidence= 0;
-                           // SendKeys.SendWait("{W}");
+                            if (punchStarted && (punchConfidence >= hadukConfidence))
+                            {
+                                Console.WriteLine("             Punch Thrown");
+                                punchStarted = false;
+                                punchConfidence = 0;
+                                hadukConfidence = 0;
+                                punchProgress = 0;
+                            }
+                            else if (kickStarted)
+                            {
+                                Console.WriteLine("             Kick Thrown");
+                                kickStarted = false;
+                                kickProgress = 0;
+                            }
+                            else if (hadukStarted && (hadukConfidence <= hadukConfidence))
+                            {
+                                Console.WriteLine("             HADUKEN!!");
+                                hadukStarted = false;
+                                hadukProgress = 0;
+                                hadukConfidence = 0;
+                                punchConfidence = 0;
+                            }
+                            else if (jumpingJacksStarted)
+                            {
+                                Console.WriteLine("             JUMP");
+                                jumpingJacksStarted = false;
+                                jumpingJacksConfidence = 0;
+                                SendKeys.SendWait("{UP}");
+                            }
                         }
                         
                         this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgress, kickProgress, hadukProgress);
