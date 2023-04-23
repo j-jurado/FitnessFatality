@@ -55,10 +55,7 @@ var Game = function(){
 
 
 		document.body.style.position = 'relative'
-		document.body.style.left = ( document.body.offsetWidth  - 900 ) / 2 + 'px'
-		document.body.style.top = '20px'
 		document.body.style.overflow = 'hidden';
-		document.body.style.backgroundColor = '#000000';
 
 		//wait(10);
 		
@@ -91,8 +88,6 @@ var Game = function(){
 
 
 }();
-
-
 
 var gameStart = function(){
 	
@@ -166,6 +161,7 @@ var gameStart = function(){
 				}, 1000 )
 			}
 		}	
+
 	
 }
 

@@ -45,7 +45,7 @@
 		}
 
 		var unshift = function( fn ){
-			return prepareTimer.unshift( fn );  //保持同步, 不然可能会出现A添加进了timer， 而B没有. 好基友永远不分开.
+			return prepareTimer.unshift( fn );  //锟斤拷锟斤拷同锟斤拷, 锟斤拷然锟斤拷锟杰伙拷锟斤拷锟紸锟斤拷锟接斤拷锟斤拷timer锟斤拷 锟斤拷B没锟斤拷. 锟矫伙拷锟斤拷锟斤拷远锟斤拷锟街匡拷.
 		}
 		
 		var checkZindex = function( fn ){

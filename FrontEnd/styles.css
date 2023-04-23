@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'myFont';
+    src: url('./coolfont.ttf') format('truetype');
+}
+
+
+html{
+    background-color: black;
+    max-width: 100vw;
+    max-height: 100vh;
+    color: white;
+}
+
+body{
+    height: calc(100vh - 18px);
+}
+
+canvas{
+    position: absolute !important;
+}
+
+
+.fight-data{
+    top: 510px;
+    width: 906px;
+    position: absolute !important;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fight-data > .data-point {
+    font-size: 1.8em;
+    font-family: 'myFont' !important;
+}
+
+.copyright{
+    position: absolute;
+    bottom: 0;
+}
