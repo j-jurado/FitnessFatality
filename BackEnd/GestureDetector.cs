@@ -10,6 +10,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
     using System.Collections.Generic;
     using System.Threading;
     using System.Windows.Forms;
+    using System.Windows.Media.Media3D;
     using Microsoft.Kinect;
     using Microsoft.Kinect.VisualGestureBuilder;
 
@@ -46,7 +47,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         float hadukProgress = 0.0f;
         float punchConfidence= 0.0f;
         float kickConfidence = 0.0f;
-        float hadukConfidence= 0.0f;
+        float hadukConfidence = 0.0f;
         float jumpingJacksConfidence= 0.0f;
 
 
@@ -122,36 +123,34 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                     {
                         if (body.IsTracked)
                         {
-                            Joint spineBaseJoint = body.Joints[JointType.SpineBase];
-                            Joint spineMidJoint = body.Joints[JointType.SpineMid];
-                            double leanAngle = Math.Atan2(spineMidJoint.Position.Z - spineBaseJoint.Position.Z, spineMidJoint.Position.X - spineBaseJoint.Position.X) * 180.0 / Math.PI;
-                            
-                            leanAngle = Math.Abs(leanAngle);
-                            //Console.WriteLine("Lean angle: " + leanAngle);
-                            if (leanAngle > 160)
-                            {
-                                //Console.WriteLine("<<<<<<<<<<------------");
-                                // Hold down the "A" key for 1 second
-                                // Press the "A" key
-                                // Hold down the "A" key for one second`
-                                // Hold down the "A" key for one second
-                                // Hold down the "A" key for one second
-                                //SendKeys.SendWait("{A 10}");
-                                //System.Threading.Thread.Sleep(100);
-                               // SendKeys.SendWait("{UP}");
+                            Console.WriteLine("Body Index: " + body.TrackingId);
+                            // Calculate the lean angle of the upper body relative to the lower body
+                            CameraSpacePoint leftHip = body.Joints[JointType.HipLeft].Position;
+                            CameraSpacePoint rightHip = body.Joints[JointType.HipRight].Position;
+                            CameraSpacePoint leftShoulder = body.Joints[JointType.ShoulderLeft].Position;
+                            CameraSpacePoint rightShoulder = body.Joints[JointType.ShoulderRight].Position;
 
-                            }
-                            if (leanAngle < 20)
+                            Vector3D hipVector = (rightHip.ToVector3D() - leftHip.ToVector3D()).Normalized();
+                            Vector3D shoulderVector = (rightShoulder.ToVector3D() - leftShoulder.ToVector3D()).Normalized();
+
+                            // Calculate the cross product of the hip and shoulder vectors
+                            Vector3D crossProduct = Vector3D.CrossProduct(hipVector, shoulderVector);
+
+                            // Calculate the signed lean angle
+                            double leanAngle = Vector3D.AngleBetween(hipVector, shoulderVector) * Math.Sign(crossProduct.Y);
+
+                            //Console.WriteLine("LEAN_ANGLE: " + leanAngle);
+                            if (leanAngle >= 15.0f)
                             {
-                                //Console.WriteLine("--------->>>>>>>>>>>>>>");
-                                // Press the "A" key
-                                // Hold down the "A" key for one second
-                                // Hold down the "A" key for one second
-                                // Hold down the "A" key for one second
-                               // SendKeys.SendWait("{D 10}");
-                                //System.Threading.Thread.Sleep(100);
-                                //SendKeys.SendWait("{UP}"); ;
+                                //Console.WriteLine("<<<<<<<<<<=================");
+                                //SendKeys.SendWait("{A}");
                             }
+                            else if (leanAngle <= -10.0f)
+                            {
+                                //Console.WriteLine("===============>>>>>>>>>>>>");
+                                //SendKeys.SendWait("{D 10}");
+                            }
+
                         }
                     }
                 }
@@ -433,35 +432,35 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
 
                         if (punchStarted && (punchConfidence >= hadukConfidence))
                         {
-                            Console.WriteLine("Punch Thrown");
+                            //Console.WriteLine("Punch Thrown");
                             punchStarted= false;
                             punchConfidence = 0;
                             hadukConfidence= 0;
                             punchProgress = 0;
-                            SendKeys.SendWait("{K}");
+                            //SendKeys.SendWait("{K}");
                         }
                         else if (kickStarted)
                         {
-                            Console.WriteLine("Kick Thrown");
+                            //Console.WriteLine("Kick Thrown");
                             kickStarted= false;
                             kickProgress = 0;
-                            SendKeys.SendWait("{I}");
+                            //SendKeys.SendWait("{I}");
                         }
                         else if (hadukStarted && (hadukConfidence <= hadukConfidence))
                         {
-                            Console.WriteLine("HADUKEN!!");
+                            //Console.WriteLine("HADUKEN!!");
                             hadukStarted= false;
                             hadukProgress = 0;
                             hadukConfidence= 0;
                             punchConfidence= 0;
-                            SendKeys.SendWait("{Z}");
+                            //SendKeys.SendWait("{Z}");
                         }
                         else if (jumpingJacksStarted)
                         {
                             Console.WriteLine("JUMP");
                             jumpingJacksStarted= false;
                             jumpingJacksConfidence= 0;
-                            SendKeys.SendWait("{W}");
+                           // SendKeys.SendWait("{W}");
                         }
                         
                         this.GestureResultView.UpdateGestureResult(true, punchStarted, kickStarted, hadukStarted, punchProgress, kickProgress, hadukProgress);
