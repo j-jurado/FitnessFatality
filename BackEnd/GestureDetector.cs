@@ -135,7 +135,31 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             }
                             int index = trackedBodyIds.IndexOf(body.TrackingId);
 
-                            //Console.WriteLine("Body Index: " + (index % 2));
+                            // Console.WriteLine("Body Index: " + (index % 2));
+                            // Calculate the lean angle of the upper body relative to the lower body
+                            CameraSpacePoint spineBase = body.Joints[JointType.SpineBase].Position;
+                            CameraSpacePoint spineShoulder = body.Joints[JointType.SpineShoulder].Position;
+
+                            Vector3D torsoVector = (spineShoulder.ToVector3D() - spineBase.ToVector3D()).Normalized();
+                            Vector3D verticalVector = new Vector3D(0, 1, 0);
+
+                            // Calculate the angle between the torso and the vertical y axis
+                            Vector3D crossProduct = Vector3D.CrossProduct(torsoVector, verticalVector);
+                            double leanAngle = Vector3D.AngleBetween(torsoVector, verticalVector);
+                            if (crossProduct.Z < 0) // torso is leaning to the left
+                            {
+                                leanAngle = -leanAngle;
+                            }
+
+                            Console.WriteLine("LEAN_ANGLE: " + leanAngle);
+                            // Optionally, you can add code to determine the sign of the angle based on the cross product of the torso and vertical vectors
+                            // For example:
+                            // Vector3D crossProduct = Vector3D.CrossProduct(torsoVector, verticalVector);
+                            // double sign = Math.Sign(crossProduct.Z) * Math.Sign(crossProduct.Y);
+                            // torsoAngle *= sign;
+
+                            /*
+                            // Console.WriteLine("Body Index: " + (index % 2));
                             // Calculate the lean angle of the upper body relative to the lower body
                             CameraSpacePoint leftHip = body.Joints[JointType.HipLeft].Position;
                             CameraSpacePoint rightHip = body.Joints[JointType.HipRight].Position;
@@ -157,33 +181,34 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                             {
                                 return;
                             }
+                            */
 
-                            //Console.WriteLine("LEAN_ANGLE: " + leanAngle);
+
                             // Player 1
                             if ((index % 2) == 0) {
-                                if (leanAngle >= 10.0f)
-                                {
-                                    Console.WriteLine("<<<<<<<<<<=================");
-                                    SendKeys.SendWait("{A}");
-                                }
-                                else if (leanAngle <= -10.0f)
+                                if (leanAngle >= 30.0f)
                                 {
                                     Console.WriteLine("===============>>>>>>>>>>>>");
                                     SendKeys.SendWait("{D 10}");
+                                }
+                                else if (leanAngle <= -30.0f)
+                                {
+                                    Console.WriteLine("<<<<<<<<<<=================");
+                                    SendKeys.SendWait("{A}");
                                 }
                             }
                             // Player 2
                             else
                             {
-                                if (leanAngle >= 10.0f)
-                                {
-                                    Console.WriteLine("<<<<<<<<<<=================");
-                                    SendKeys.SendWait("{LEFT 10}");
-                                }
-                                else if (leanAngle <= -10.0f)
+                                if (leanAngle >= 30.0f)
                                 {
                                     Console.WriteLine("===============>>>>>>>>>>>>");
                                     SendKeys.SendWait("{RIGHT}");
+                                }
+                                else if (leanAngle <= -30.0f)
+                                {
+                                    Console.WriteLine("<<<<<<<<<<=================");
+                                    SendKeys.SendWait("{LEFT 10}");
                                 }
                             }
                         }
